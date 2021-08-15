@@ -78,10 +78,11 @@ type UserUpdatePayload struct {
 }
 
 //GetUsers returns a paginated list of users
-func (c *Client) GetUsers() (*UserList, error) {
+func (c *Client) GetUsers(pageSize int) (*UserList, error) {
 	path := "/api/users"
 
 	form := url.Values{}
+	form.Add("page_size", strconv.Itoa(pageSize))
 	response, err := c.get(path, form)
 
 	if err != nil {
